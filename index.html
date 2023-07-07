@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/2013c63b7f.js" crossorigin="anonymous"></script>
-    <!-- Vue -->
+    <!-- vue -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
@@ -17,7 +17,7 @@
 
 <body>
 
-    <div class="container-body">
+    <div class="cont-body">
 
         <div class="container" id="app">
 
@@ -25,7 +25,7 @@
             <div class="box-left">
 
 
-                <div class="user-box user-bord-right">
+                <div class="user-box bord-right-lightGray">
 
 
                     <div class="card">
@@ -36,9 +36,9 @@
                     </div>
 
                     <div class="card margin-r">
-                        <a href=""><i class="fa-solid fa-circle-notch color-font"></i></a>
-                        <a href=""><i class="fa-solid fa-message color-font"></i></a>
-                        <a href=""><i class="fa-solid fa-ellipsis-vertical color-font"></i></a>
+                        <a href=""><i class="fa-solid fa-circle-notch font-color"></i></a>
+                        <a href=""><i class="fa-solid fa-message font-color"></i></a>
+                        <a href=""><i class="fa-solid fa-ellipsis-vertical font-color"></i></a>
                     </div>
 
 
@@ -51,16 +51,14 @@
                         <i class="fa-solid fa-bell-slash"></i>
                     </a>
                     <div>
-                        <p class="font-small">Ricevi notifiche di nuovi messaggi</p>
-                        <a href="" class="font-small">attiva notifiche desktop</a>
+                        <p class="stato-color">Ricevi notifiche di nuovi messaggi</p>
+                        <a href="" class="stato-color">attiva notifiche desktop</a>
                     </div>
                 </div>
 
                 <div class="box-search">
-
-
-                    <input type="text" class="f-col-B1B1B1" placeholder=" &#x1F50D; Cerca o inizia una nuova chat">
-
+                    <input type="text" v-model="searchName" class="font" placeholder="Cerca o inizia una nuova chat">
+                    <span class="search-icon"><i class="fas fa-search"></i></span>
                 </div>
 
 
@@ -68,35 +66,32 @@
                 <div class="contacts">
 
 
-                    <div class="user-box" v-for="(item,index) in contacts" @click="changeContact(index)">
+                    <div class="user-box bg-white" v-for="(item,index) in contacts" @click="changeContact(index)">
 
-                        <div class="card">
+                        <div class="card" v-if="check(item)">
                             <div class="box-img">
                                 <img :src="item.avatar" alt="">
                             </div>
                             <div>
                                 {{item.name}}
-                                <p class="font-small stato-small">Ultimo messaggio inviato</p>
+                                <p class="stato-color f_col_BBB9C0">Ultimo messaggio inviato</p>
                             </div>
                         </div>
 
-                        <div class="margin-r">
-                            <p class="font-small stato-small">12:00</p>
+                        <div class="margin-r" v-if="check(item)">
+                            <p class="stato-color f_col_BBB9C0">12:00</p>
                         </div>
                     </div>
-
 
                 </div>
 
 
             </div>
 
-
-
-
             <div class="box-right">
 
-                <div class="user-box">
+                <div class="user-box ">
+
 
                     <div class="card">
                         <div class="box-img">
@@ -104,15 +99,15 @@
                         </div>
                         <div>
                             {{contacts[currentContact].name}}
-                            <p class="font-small f-col-B1B1B1">Ultimo accesso oggi alle 12</p>
+                            <p class="stato-color ">Ultimo accesso oggi alle 12</p>
                         </div>
 
                     </div>
 
                     <div class="card margin-r">
-                        <a href=""><i class="fa-solid fa-magnifying-glass color-font"></i></a>
-                        <a href=""><i class="fa-solid fa-paperclip color-font"></i></a>
-                        <a href=""><i class="fa-solid fa-ellipsis-vertical color-font"></i></a>
+                        <a href=""><i class="fa-solid fa-magnifying-glass font-color"></i></a>
+                        <a href=""><i class="fa-solid fa-paperclip font-color"></i></a>
+                        <a href=""><i class="fa-solid fa-ellipsis-vertical font-color"></i></a>
                     </div>
 
                 </div>
@@ -123,7 +118,7 @@
                         :class="itm.status === 'sent' ? 'flex-end': ''">
                         <div :class="itm.status === 'sent' ? 'sent-message' : 'reiceved-message' ">
                             {{itm.message}}
-                            <div class="message-time font-small">
+                            <div class="message-time stato-color">
                                 12:00
                             </div>
                         </div>
@@ -133,20 +128,23 @@
 
                 <div class="box-sendmessage">
                     <div>
-                        <a href="" class="color-font"><i class="fa-regular fa-face-smile f-col-B1B1B1"></i></a>
+                        <a href="" class=""><i class="fa-regular fa-face-smile font-color"></i></a>
                     </div>
 
                     <div class="input-message">
-                        <input type="text" name="" id="" placeholder="Scrivi un messaggio">
+                        <input type="text" v-model="in_message" name="" @keyup.enter="addMessage" id=""
+                            placeholder="Scrivi un messaggio">
                     </div>
 
                     <div>
-                        <a href="" class="color-font"><i class="fa-solid fa-microphone f-col-B1B1B1"></i></a>
+                        <a href="" class=""><i class="fa-solid fa-microphone font-color"></i></a>
                     </div>
                 </div>
 
 
             </div>
+
+
 
         </div>
 
