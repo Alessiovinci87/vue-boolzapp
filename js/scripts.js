@@ -210,18 +210,16 @@ createApp({
         },
 
         check(itm) {
-
-            if (this.searchName === "" || itm.name.includes(this.searchName)) {
-
-                return true
+            if (this.searchName === "" || itm.name.toLowerCase().includes(this.searchName.toLowerCase())) {
+                return true;
+            } else {
+                return false;
             }
-            else {
-                return false
-            }
-
-        },
+        }
 
     }
+
+
 
 
 
